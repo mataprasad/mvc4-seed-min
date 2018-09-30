@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DtTasks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="GroupName" Type="varchar" MaxLength="128" />
+          <Property Name="TaskName" Type="varchar" MaxLength="512" />
+          <Property Name="TaskDescription" Type="text" />
+          <Property Name="ScheduledTime" Type="datetime" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DtTasMarking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TaskID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="MarkingTime" Type="datetime" />
+          <Property Name="ForDate" Type="datetime" />
+          <Property Name="CheckingTime" Type="datetime" />
+          <Property Name="CheckBy" Type="int" />
+          <Property Name="MarkingComment" Type="nvarchar" MaxLength="1024" />
+          <Property Name="CheckingComment" Type="nvarchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="DtUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="256" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="ResetKey" Type="varchar" MaxLength="50" />
+          <Property Name="ResetKeyExpiry" Type="datetime" />
+          <Property Name="IsAdmin" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'db_test.dbo.test_dt' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="test_dt">
+          <Property Name="id" Type="varchar" MaxLength="50" />
+          <Property Name="CoreBusiness" Type="varchar" MaxLength="100" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="dt" Type="datetime" />
+        </EntityType>-->
+        <EntityContainer Name="db_testModelStoreContainer">
+          <EntitySet Name="DtTasks" EntityType="Self.DtTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DtTasMarking" EntityType="Self.DtTasMarking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DtUser" EntityType="Self.DtUser" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DtTask">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="GroupName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="TaskName" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="TaskDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ScheduledTime" Type="DateTime" Precision="3" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DtTasMarking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="MarkingTime" Type="DateTime" Precision="3" />
+          <Property Name="ForDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckingTime" Type="DateTime" Precision="3" />
+          <Property Name="CheckBy" Type="Int32" />
+          <Property Name="MarkingComment" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="CheckingComment" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DtUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ResetKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ResetKeyExpiry" Type="DateTime" Precision="3" />
+          <Property Name="IsAdmin" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="db_testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DtTasks" EntityType="Self.DtTask" />
+          <EntitySet Name="DtTasMarkings" EntityType="Self.DtTasMarking" />
+          <EntitySet Name="DtUsers" EntityType="Self.DtUser" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_testModelStoreContainer" CdmEntityContainer="db_testEntities">
+          <EntitySetMapping Name="DtTasks">
+            <EntityTypeMapping TypeName="db_testModel.DtTask">
+              <MappingFragment StoreEntitySet="DtTasks">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="ScheduledTime" ColumnName="ScheduledTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DtTasMarkings">
+            <EntityTypeMapping TypeName="db_testModel.DtTasMarking">
+              <MappingFragment StoreEntitySet="DtTasMarking">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MarkingTime" ColumnName="MarkingTime" />
+                <ScalarProperty Name="ForDate" ColumnName="ForDate" />
+                <ScalarProperty Name="CheckingTime" ColumnName="CheckingTime" />
+                <ScalarProperty Name="CheckBy" ColumnName="CheckBy" />
+                <ScalarProperty Name="MarkingComment" ColumnName="MarkingComment" />
+                <ScalarProperty Name="CheckingComment" ColumnName="CheckingComment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DtUsers">
+            <EntityTypeMapping TypeName="db_testModel.DtUser">
+              <MappingFragment StoreEntitySet="DtUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ResetKey" ColumnName="ResetKey" />
+                <ScalarProperty Name="ResetKeyExpiry" ColumnName="ResetKeyExpiry" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
