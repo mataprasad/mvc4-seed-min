@@ -43,7 +43,9 @@
     <Compile Include="Db\DtTask.cs" />
     <Compile Include="Db\DtTasMarking.cs" />
     <Compile Include="Db\DtUser.cs" />
+    <Compile Include="Dto\TestDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vm\LoginVm.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
